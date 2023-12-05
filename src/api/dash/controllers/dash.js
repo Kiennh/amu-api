@@ -5,9 +5,10 @@
  */
 
 module.exports = {
-  exampleAction: async (ctx, next) => {
+  lastVersion: async (ctx, next) => {
     try {
-      ctx.body = 'ok';
+      const data = await strapi.service('api::dash.dash').lastVersion();
+      ctx.body = data;
     } catch (err) {
       ctx.body = err;
     }

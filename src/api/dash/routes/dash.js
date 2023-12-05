@@ -1,13 +1,13 @@
 module.exports = {
   routes: [
     {
-     method: 'GET',
-     path: '/dash',
-     handler: 'dash.exampleAction',
-     config: {
-       policies: [],
-       middlewares: [],
-     },
+      method: 'GET',
+      path: '/dash',
+      handler: 'dash.lastVersion',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
     },
   ],
 };
