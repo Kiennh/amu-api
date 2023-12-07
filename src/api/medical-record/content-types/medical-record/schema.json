@@ -1,0 +1,177 @@
+{
+  "kind": "collectionType",
+  "collectionName": "medical_records",
+  "info": {
+    "singularName": "medical-record",
+    "pluralName": "medical-records",
+    "displayName": "Medical record",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "string"
+    },
+    "patient": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::patient.patient"
+    },
+    "MDD_BENH_NHAN": {
+      "type": "string"
+    },
+    "NGAY_KHAO_SAT": {
+      "type": "date"
+    },
+    "PHAN_LOAI_SINH_NON": {
+      "type": "string"
+    },
+    "CAN_NANG_KG": {
+      "type": "integer"
+    },
+    "CAN_NANG_G": {
+      "type": "integer"
+    },
+    "NGAY_NHAP_VIEN": {
+      "type": "date"
+    },
+    "CO_PHAU_THUAT": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_CATHETER_TRUNG_TAM": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_CATHETHER_NGOAI_VI": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_THONG_TIEU": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_NOI_KHI_QUAN": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_SD_KHANG_SINH": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "SO_KHANG_SINH": {
+      "type": "integer"
+    },
+    "CO_SOT_RET": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_BENH_LAO": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_SUY_DINH_DUONG": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_COPD": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_CHUYEN_VIEN": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_CHUYEN_VIEN_TU_CSYT": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_NHAP_VIEN_90_NGAY": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "LOAI_PHAU_THUAT_DA_THUC_HIEN": {
+      "type": "text"
+    },
+    "GHI_CHU": {
+      "type": "string"
+    },
+    "MS_BENH_NHAN": {
+      "type": "string"
+    },
+    "CO_NHIEM_HIV": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    },
+    "CO_DIEU_TRI_HIV": {
+      "type": "enumeration",
+      "enum": [
+        "yes",
+        "no",
+        "unknown"
+      ]
+    }
+  }
+}

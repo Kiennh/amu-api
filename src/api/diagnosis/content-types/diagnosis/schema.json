@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "diagnoses",
+  "info": {
+    "singularName": "diagnosis",
+    "pluralName": "diagnoses",
+    "displayName": "Diagnosis"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "example": {
+      "type": "text"
+    },
+    "example_vi": {
+      "type": "string"
+    }
+  }
+}

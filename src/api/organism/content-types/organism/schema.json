@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "organisms",
+  "info": {
+    "singularName": "organism",
+    "pluralName": "organisms",
+    "displayName": "Organism"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "microorganism": {
+      "type": "string"
+    },
+    "family": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    }
+  }
+}

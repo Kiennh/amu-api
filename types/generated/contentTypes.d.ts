@@ -362,36 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiVersionVersion extends Schema.CollectionType {
-  collectionName: 'versions';
-  info: {
-    singularName: 'version';
-    pluralName: 'versions';
-    displayName: 'Version';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    name: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::version.version',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::version.version',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -505,6 +475,50 @@ export interface PluginUploadFolder extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::upload.folder',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<{
+        min: 1;
+        max: 50;
+      }>;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
       'oneToOne',
       'admin::user'
     > &
@@ -663,46 +677,323 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
+export interface ApiAntibioticAntibiotic extends Schema.CollectionType {
+  collectionName: 'antibiotics';
   info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
-    description: '';
+    singularName: 'antibiotic';
+    pluralName: 'antibiotics';
+    displayName: 'Antibiotic';
   };
   options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
+    draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<{
-        min: 1;
-        max: 50;
-      }>;
-    code: Attribute.String & Attribute.Unique;
+    name: Attribute.String;
+    atcCode: Attribute.String;
+    note: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::antibiotic.antibiotic',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
+      'api::antibiotic.antibiotic',
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDepartmentDepartment extends Schema.CollectionType {
+  collectionName: 'departments';
+  info: {
+    singularName: 'department';
+    pluralName: 'departments';
+    displayName: 'Department';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    department: Attribute.Text;
+    wardTypeName: Attribute.String;
+    wardTypeCode: Attribute.String;
+    note: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::department.department',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::department.department',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiDiagnosisDiagnosis extends Schema.CollectionType {
+  collectionName: 'diagnoses';
+  info: {
+    singularName: 'diagnosis';
+    pluralName: 'diagnoses';
+    displayName: 'Diagnosis';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    example: Attribute.Text;
+    example_vi: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::diagnosis.diagnosis',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::diagnosis.diagnosis',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiMedicalRecordMedicalRecord extends Schema.CollectionType {
+  collectionName: 'medical_records';
+  info: {
+    singularName: 'medical-record';
+    pluralName: 'medical-records';
+    displayName: 'Medical record';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    type: Attribute.String;
+    patient: Attribute.Relation<
+      'api::medical-record.medical-record',
+      'oneToOne',
+      'api::patient.patient'
+    >;
+    MDD_BENH_NHAN: Attribute.String;
+    NGAY_KHAO_SAT: Attribute.Date;
+    PHAN_LOAI_SINH_NON: Attribute.String;
+    CAN_NANG_KG: Attribute.Integer;
+    CAN_NANG_G: Attribute.Integer;
+    NGAY_NHAP_VIEN: Attribute.Date;
+    CO_PHAU_THUAT: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_CATHETER_TRUNG_TAM: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_CATHETHER_NGOAI_VI: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_THONG_TIEU: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_NOI_KHI_QUAN: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_SD_KHANG_SINH: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    SO_KHANG_SINH: Attribute.Integer;
+    CO_SOT_RET: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_BENH_LAO: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_SUY_DINH_DUONG: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_COPD: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_CHUYEN_VIEN: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_CHUYEN_VIEN_TU_CSYT: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_NHAP_VIEN_90_NGAY: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    LOAI_PHAU_THUAT_DA_THUC_HIEN: Attribute.Text;
+    GHI_CHU: Attribute.String;
+    MS_BENH_NHAN: Attribute.String;
+    CO_NHIEM_HIV: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    CO_DIEU_TRI_HIV: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::medical-record.medical-record',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::medical-record.medical-record',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOrganismOrganism extends Schema.CollectionType {
+  collectionName: 'organisms';
+  info: {
+    singularName: 'organism';
+    pluralName: 'organisms';
+    displayName: 'Organism';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    microorganism: Attribute.String;
+    family: Attribute.String;
+    code: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::organism.organism',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::organism.organism',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiPatientPatient extends Schema.CollectionType {
+  collectionName: 'patients';
+  info: {
+    singularName: 'patient';
+    pluralName: 'patients';
+    displayName: 'Patient';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    NGAY_KHAO_SAT: Attribute.Date;
+    MDD_BENH_PHONG: Attribute.String;
+    MS_BENH_PHONG: Attribute.String;
+    MDD_BENH_NHAN: Attribute.String & Attribute.Required & Attribute.Unique;
+    MS_BENH_NHAN: Attribute.String;
+    GIOI_TINH: Attribute.String;
+    THANG_TUOI: Attribute.Integer;
+    NAM_TUOI: Attribute.Integer;
+    NGAY_SINH: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::patient.patient',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::patient.patient',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiQuestionQuestion extends Schema.CollectionType {
+  collectionName: 'questions';
+  info: {
+    singularName: 'question';
+    pluralName: 'questions';
+    displayName: 'Question';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    code: Attribute.String;
+    question: Attribute.Text;
+    type_answer: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::question.question',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiVersionVersion extends Schema.CollectionType {
+  collectionName: 'versions';
+  info: {
+    singularName: 'version';
+    pluralName: 'versions';
+    displayName: 'Version';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::version.version',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::version.version',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiWardWard extends Schema.CollectionType {
+  collectionName: 'wards';
+  info: {
+    singularName: 'ward';
+    pluralName: 'wards';
+    displayName: 'Ward';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    specialtyCode: Attribute.String;
+    specialtyName: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::ward.ward', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::ward.ward', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -717,13 +1008,21 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::version.version': ApiVersionVersion;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
+      'api::antibiotic.antibiotic': ApiAntibioticAntibiotic;
+      'api::department.department': ApiDepartmentDepartment;
+      'api::diagnosis.diagnosis': ApiDiagnosisDiagnosis;
+      'api::medical-record.medical-record': ApiMedicalRecordMedicalRecord;
+      'api::organism.organism': ApiOrganismOrganism;
+      'api::patient.patient': ApiPatientPatient;
+      'api::question.question': ApiQuestionQuestion;
+      'api::version.version': ApiVersionVersion;
+      'api::ward.ward': ApiWardWard;
     }
   }
 }

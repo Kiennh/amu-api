@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "antibiotics",
+  "info": {
+    "singularName": "antibiotic",
+    "pluralName": "antibiotics",
+    "displayName": "Antibiotic"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "atcCode": {
+      "type": "string"
+    },
+    "note": {
+      "type": "text"
+    }
+  }
+}

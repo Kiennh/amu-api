@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "departments",
+  "info": {
+    "singularName": "department",
+    "pluralName": "departments",
+    "displayName": "Department"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "department": {
+      "type": "text"
+    },
+    "wardTypeName": {
+      "type": "string"
+    },
+    "wardTypeCode": {
+      "type": "string"
+    },
+    "note": {
+      "type": "text"
+    }
+  }
+}

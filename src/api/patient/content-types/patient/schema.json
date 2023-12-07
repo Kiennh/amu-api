@@ -1,0 +1,48 @@
+{
+  "kind": "collectionType",
+  "collectionName": "patients",
+  "info": {
+    "singularName": "patient",
+    "pluralName": "patients",
+    "displayName": "Patient",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "NGAY_KHAO_SAT": {
+      "type": "date"
+    },
+    "MDD_BENH_PHONG": {
+      "type": "string"
+    },
+    "MS_BENH_PHONG": {
+      "type": "string"
+    },
+    "MDD_BENH_NHAN": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "MS_BENH_NHAN": {
+      "type": "string"
+    },
+    "GIOI_TINH": {
+      "type": "string"
+    },
+    "THANG_TUOI": {
+      "type": "integer"
+    },
+    "NAM_TUOI": {
+      "type": "integer"
+    },
+    "NGAY_SINH": {
+      "type": "date"
+    }
+  }
+}
