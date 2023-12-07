@@ -4,7 +4,8 @@
   "info": {
     "singularName": "department",
     "pluralName": "departments",
-    "displayName": "Department"
+    "displayName": "Department",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -15,13 +16,15 @@
       "type": "string"
     },
     "department": {
-      "type": "text"
+      "type": "string"
     },
     "wardTypeName": {
       "type": "string"
     },
     "wardTypeCode": {
-      "type": "string"
+      "type": "string",
+      "required": true,
+      "unique": true
     },
     "note": {
       "type": "text"

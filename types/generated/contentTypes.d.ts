@@ -715,15 +715,16 @@ export interface ApiDepartmentDepartment extends Schema.CollectionType {
     singularName: 'department';
     pluralName: 'departments';
     displayName: 'Department';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String;
-    department: Attribute.Text;
+    department: Attribute.String;
     wardTypeName: Attribute.String;
-    wardTypeCode: Attribute.String;
+    wardTypeCode: Attribute.String & Attribute.Required & Attribute.Unique;
     note: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -819,6 +820,18 @@ export interface ApiMedicalRecordMedicalRecord extends Schema.CollectionType {
     MS_BENH_NHAN: Attribute.String;
     CO_NHIEM_HIV: Attribute.Enumeration<['yes', 'no', 'unknown']>;
     CO_DIEU_TRI_HIV: Attribute.Enumeration<['yes', 'no', 'unknown']>;
+    IDENTIFY: Attribute.String;
+    MS_BENH_PHONG: Attribute.String;
+    LOAI_CHI_DINH: Attribute.String;
+    THOI_GIAN_SD_KS_DP_NGOAI_KHOA: Attribute.String;
+    MA_VI_TRI_PT_AD_DP_NGOAI_KHOA: Attribute.String;
+    VI_TRI_PT_AD_DP_NGOAI_KHOA: Attribute.String;
+    CHAN_DOAN: Attribute.String;
+    CO_LAY_MAU_CHO_XN_VI_SINH: Attribute.String;
+    NGAY_BD_SD_KS: Attribute.Date;
+    CO_LY_DO_CHI_DINH_KHANG_SINH: Attribute.String;
+    CO_CHI_DINH_KHAC: Attribute.String;
+    LAN_CHI_DINH: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -950,12 +963,14 @@ export interface ApiVersionVersion extends Schema.CollectionType {
     singularName: 'version';
     pluralName: 'versions';
     displayName: 'Version';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     name: Attribute.String;
+    code: Attribute.String & Attribute.Required & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

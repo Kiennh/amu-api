@@ -172,6 +172,42 @@
         "no",
         "unknown"
       ]
+    },
+    "IDENTIFY": {
+      "type": "string"
+    },
+    "MS_BENH_PHONG": {
+      "type": "string"
+    },
+    "LOAI_CHI_DINH": {
+      "type": "string"
+    },
+    "THOI_GIAN_SD_KS_DP_NGOAI_KHOA": {
+      "type": "string"
+    },
+    "MA_VI_TRI_PT_AD_DP_NGOAI_KHOA": {
+      "type": "string"
+    },
+    "VI_TRI_PT_AD_DP_NGOAI_KHOA": {
+      "type": "string"
+    },
+    "CHAN_DOAN": {
+      "type": "string"
+    },
+    "CO_LAY_MAU_CHO_XN_VI_SINH": {
+      "type": "string"
+    },
+    "NGAY_BD_SD_KS": {
+      "type": "date"
+    },
+    "CO_LY_DO_CHI_DINH_KHANG_SINH": {
+      "type": "string"
+    },
+    "CO_CHI_DINH_KHAC": {
+      "type": "string"
+    },
+    "LAN_CHI_DINH": {
+      "type": "integer"
     }
   }
 }
