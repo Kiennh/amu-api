@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "import_logs",
+  "info": {
+    "singularName": "import-log",
+    "pluralName": "import-logs",
+    "displayName": "Import log",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "type": {
+      "type": "enumeration",
+      "enum": [
+        "info",
+        "error",
+        "debug"
+      ]
+    },
+    "details": {
+      "type": "text"
+    }
+  }
+}

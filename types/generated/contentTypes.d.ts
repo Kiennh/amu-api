@@ -776,6 +776,39 @@ export interface ApiDiagnosisDiagnosis extends Schema.CollectionType {
   };
 }
 
+export interface ApiImportLogImportLog extends Schema.CollectionType {
+  collectionName: 'import_logs';
+  info: {
+    singularName: 'import-log';
+    pluralName: 'import-logs';
+    displayName: 'Import log';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    type: Attribute.Enumeration<['info', 'error', 'debug']>;
+    details: Attribute.Text;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::import-log.import-log',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::import-log.import-log',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiMedicalRecordMedicalRecord extends Schema.CollectionType {
   collectionName: 'medical_records';
   info: {
@@ -789,7 +822,7 @@ export interface ApiMedicalRecordMedicalRecord extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    type: Attribute.String;
+    type: Attribute.Enumeration<['BASE', 'VI_SINH', 'KHANG_SINH', 'CHI_DINH']>;
     patient: Attribute.Relation<
       'api::medical-record.medical-record',
       'oneToOne',
@@ -827,11 +860,39 @@ export interface ApiMedicalRecordMedicalRecord extends Schema.CollectionType {
     MA_VI_TRI_PT_AD_DP_NGOAI_KHOA: Attribute.String;
     VI_TRI_PT_AD_DP_NGOAI_KHOA: Attribute.String;
     CHAN_DOAN: Attribute.String;
-    CO_LAY_MAU_CHO_XN_VI_SINH: Attribute.String;
+    CO_LAY_MAU_CHO_XN_VI_SINH: Attribute.Enumeration<['yes', 'no', 'unknown']>;
     NGAY_BD_SD_KS: Attribute.Date;
-    CO_LY_DO_CHI_DINH_KHANG_SINH: Attribute.String;
-    CO_CHI_DINH_KHAC: Attribute.String;
+    CO_LY_DO_CHI_DINH_KHANG_SINH: Attribute.Enumeration<
+      ['yes', 'no', 'unknown']
+    >;
+    CO_CHI_DINH_KHAC: Attribute.Enumeration<['yes', 'no', 'unknown']>;
     LAN_CHI_DINH: Attribute.Integer;
+    STT_KS: Attribute.Integer;
+    TEN_THUONG_MAI_KS: Attribute.String;
+    TEN_HOAT_CHAT_KS: Attribute.String;
+    CO_TEN_KS_DUOC_MA_HOA: Attribute.String;
+    LIEU_DUNG_1_LAN_KS: Attribute.String;
+    DON_VI_LIEU_DUNG_KS: Attribute.String;
+    LIEU_DUNG_1_LAN_CHO_TUNG_HOAT_CHAT: Attribute.String;
+    SO_LAN_DUNG_TRONG_NGAY: Attribute.String;
+    DUONG_DUNG: Attribute.String;
+    NGUOI_KE_DON: Attribute.String;
+    LOAI_DUONG_TIEM_TRUYEN: Attribute.String;
+    CO_CHUYEN_DUONG_UONG: Attribute.String;
+    SO_LIEU_BI_BO: Attribute.String;
+    LY_DO_BO_LIEU: Attribute.String;
+    CO_TUAN_THU_HUONG_DAN_DIEU_TRI: Attribute.String;
+    GHI_CHU_DANH_GIA: Attribute.String;
+    DIEU_TRI_THEO: Attribute.String;
+    TUAN_THU_HUONG_DAN_DIEU_TRI: Attribute.String;
+    STT_CHI_DINH_TUONG_UNG: Attribute.String;
+    LOAI_MAU: Attribute.String;
+    KET_QUA_NUOI_CAY: Attribute.String;
+    VI_SINH_VAT: Attribute.String;
+    KET_QUA_KSD: Attribute.String;
+    KIEU_HINH_DE_KHANG: Attribute.String;
+    CO_LAY_MAU_VI_SINH_KHAC: Attribute.String;
+    STT_VS: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1032,6 +1093,7 @@ declare module '@strapi/types' {
       'api::antibiotic.antibiotic': ApiAntibioticAntibiotic;
       'api::department.department': ApiDepartmentDepartment;
       'api::diagnosis.diagnosis': ApiDiagnosisDiagnosis;
+      'api::import-log.import-log': ApiImportLogImportLog;
       'api::medical-record.medical-record': ApiMedicalRecordMedicalRecord;
       'api::organism.organism': ApiOrganismOrganism;
       'api::patient.patient': ApiPatientPatient;
