@@ -683,6 +683,7 @@ export interface ApiAntibioticAntibiotic extends Schema.CollectionType {
     singularName: 'antibiotic';
     pluralName: 'antibiotics';
     displayName: 'Antibiotic';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -691,6 +692,8 @@ export interface ApiAntibioticAntibiotic extends Schema.CollectionType {
     name: Attribute.String;
     atcCode: Attribute.String;
     note: Attribute.Text;
+    class: Attribute.String;
+    variable3: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -726,6 +729,7 @@ export interface ApiDepartmentDepartment extends Schema.CollectionType {
     wardTypeName: Attribute.String;
     wardTypeCode: Attribute.String & Attribute.Required & Attribute.Unique;
     note: Attribute.Text;
+    type: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -772,6 +776,70 @@ export interface ApiDiagnosisDiagnosis extends Schema.CollectionType {
       'oneToOne',
       'admin::user'
     > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHospitalDetailHospitalDetail extends Schema.CollectionType {
+  collectionName: 'hospital_details';
+  info: {
+    singularName: 'hospital-detail';
+    pluralName: 'hospital-details';
+    displayName: 'HospitalDetail';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    MDD_BENH_PHONG: Attribute.String;
+    NAM_KHAO_SAT: Attribute.Integer;
+    LOAI_BENH_PHONG: Attribute.String;
+    NHOM_BENH_PHONG: Attribute.String;
+    SO_BENH_NHAN: Attribute.Integer;
+    SO_BENH_NHAN_HOP_LE: Attribute.Integer;
+    SO_BENH_NHAN_KHAO_SAT: Attribute.Integer;
+    code: Attribute.String;
+    NGAY_KHAO_SAT: Attribute.Date;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::hospital-detail.hospital-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::hospital-detail.hospital-detail',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiI18NI18N extends Schema.CollectionType {
+  collectionName: 'i18ns';
+  info: {
+    singularName: 'i18n';
+    pluralName: 'i18ns';
+    displayName: 'I18n';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    key: Attribute.String;
+    vi: Attribute.String;
+    en: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::i18n.i18n', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::i18n.i18n', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
@@ -866,8 +934,6 @@ export interface ApiMedicalRecordMedicalRecord extends Schema.CollectionType {
       ['yes', 'no', 'unknown']
     >;
     CO_CHI_DINH_KHAC: Attribute.Enumeration<['yes', 'no', 'unknown']>;
-    LAN_CHI_DINH: Attribute.Integer;
-    STT_KS: Attribute.Integer;
     TEN_THUONG_MAI_KS: Attribute.String;
     TEN_HOAT_CHAT_KS: Attribute.String;
     CO_TEN_KS_DUOC_MA_HOA: Attribute.String;
@@ -892,7 +958,13 @@ export interface ApiMedicalRecordMedicalRecord extends Schema.CollectionType {
     KET_QUA_KSD: Attribute.String;
     KIEU_HINH_DE_KHANG: Attribute.String;
     CO_LAY_MAU_VI_SINH_KHAC: Attribute.String;
-    STT_VS: Attribute.Integer;
+    STT: Attribute.Integer;
+    THANG_TUOI: Attribute.Integer;
+    NAM_TUOI: Attribute.Integer;
+    NHOM_TUOI: Attribute.String;
+    NGAY_NAM_VIEN: Attribute.Integer;
+    NHOM_NGAY_NAM_VIEN: Attribute.String;
+    MDD_BENH_PHONG: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -966,6 +1038,7 @@ export interface ApiPatientPatient extends Schema.CollectionType {
     THANG_TUOI: Attribute.Integer;
     NAM_TUOI: Attribute.Integer;
     NGAY_SINH: Attribute.Date;
+    NHOM_TUOI: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1093,6 +1166,8 @@ declare module '@strapi/types' {
       'api::antibiotic.antibiotic': ApiAntibioticAntibiotic;
       'api::department.department': ApiDepartmentDepartment;
       'api::diagnosis.diagnosis': ApiDiagnosisDiagnosis;
+      'api::hospital-detail.hospital-detail': ApiHospitalDetailHospitalDetail;
+      'api::i18n.i18n': ApiI18NI18N;
       'api::import-log.import-log': ApiImportLogImportLog;
       'api::medical-record.medical-record': ApiMedicalRecordMedicalRecord;
       'api::organism.organism': ApiOrganismOrganism;

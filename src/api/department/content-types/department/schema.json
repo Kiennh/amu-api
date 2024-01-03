@@ -28,6 +28,9 @@
     },
     "note": {
       "type": "text"
+    },
+    "type": {
+      "type": "string"
     }
   }
 }

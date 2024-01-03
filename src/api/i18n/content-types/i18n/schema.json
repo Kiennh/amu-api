@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "i18ns",
+  "info": {
+    "singularName": "i18n",
+    "pluralName": "i18ns",
+    "displayName": "I18n"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "key": {
+      "type": "string"
+    },
+    "vi": {
+      "type": "string"
+    },
+    "en": {
+      "type": "string"
+    }
+  }
+}

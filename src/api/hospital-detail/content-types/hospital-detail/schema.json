@@ -1,0 +1,46 @@
+{
+  "kind": "collectionType",
+  "collectionName": "hospital_details",
+  "info": {
+    "singularName": "hospital-detail",
+    "pluralName": "hospital-details",
+    "displayName": "HospitalDetail",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string"
+    },
+    "MDD_BENH_PHONG": {
+      "type": "string"
+    },
+    "NAM_KHAO_SAT": {
+      "type": "integer"
+    },
+    "LOAI_BENH_PHONG": {
+      "type": "string"
+    },
+    "NHOM_BENH_PHONG": {
+      "type": "string"
+    },
+    "SO_BENH_NHAN": {
+      "type": "integer"
+    },
+    "SO_BENH_NHAN_HOP_LE": {
+      "type": "integer"
+    },
+    "SO_BENH_NHAN_KHAO_SAT": {
+      "type": "integer"
+    },
+    "code": {
+      "type": "string"
+    },
+    "NGAY_KHAO_SAT": {
+      "type": "date"
+    }
+  }
+}

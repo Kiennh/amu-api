@@ -4,7 +4,8 @@
   "info": {
     "singularName": "antibiotic",
     "pluralName": "antibiotics",
-    "displayName": "Antibiotic"
+    "displayName": "Antibiotic",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,6 +20,12 @@
     },
     "note": {
       "type": "text"
+    },
+    "class": {
+      "type": "string"
+    },
+    "variable3": {
+      "type": "string"
     }
   }
 }

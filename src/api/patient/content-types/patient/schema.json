@@ -43,6 +43,9 @@
     },
     "NGAY_SINH": {
       "type": "date"
+    },
+    "NHOM_TUOI": {
+      "type": "string"
     }
   }
 }

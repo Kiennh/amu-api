@@ -227,12 +227,6 @@
         "unknown"
       ]
     },
-    "LAN_CHI_DINH": {
-      "type": "integer"
-    },
-    "STT_KS": {
-      "type": "integer"
-    },
     "TEN_THUONG_MAI_KS": {
       "type": "string"
     },
@@ -305,8 +299,26 @@
     "CO_LAY_MAU_VI_SINH_KHAC": {
       "type": "string"
     },
-    "STT_VS": {
+    "STT": {
       "type": "integer"
+    },
+    "THANG_TUOI": {
+      "type": "integer"
+    },
+    "NAM_TUOI": {
+      "type": "integer"
+    },
+    "NHOM_TUOI": {
+      "type": "string"
+    },
+    "NGAY_NAM_VIEN": {
+      "type": "integer"
+    },
+    "NHOM_NGAY_NAM_VIEN": {
+      "type": "string"
+    },
+    "MDD_BENH_PHONG": {
+      "type": "string"
     }
   }
 }
