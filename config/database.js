@@ -7,8 +7,8 @@ module.exports = ({ env }) => {
     mysql: {
       connection: {
         connectionString: env('DATABASE_URL'),
-        host: env('DATABASE_HOST', 'path-amu'),
-        port: env.int('DATABASE_PORT', 13306),
+        host: env('DATABASE_HOST', 'amu-db-1'),
+        port: env.int('DATABASE_PORT', 3306),
         database: env('DATABASE_NAME', 'path'),
         user: env('DATABASE_USERNAME', 'amu'),
         password: env('DATABASE_PASSWORD', '123456##'),

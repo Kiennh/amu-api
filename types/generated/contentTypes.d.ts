@@ -965,6 +965,7 @@ export interface ApiMedicalRecordMedicalRecord extends Schema.CollectionType {
     NGAY_NAM_VIEN: Attribute.Integer;
     NHOM_NGAY_NAM_VIEN: Attribute.String;
     MDD_BENH_PHONG: Attribute.String;
+    BENH_VIEN: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

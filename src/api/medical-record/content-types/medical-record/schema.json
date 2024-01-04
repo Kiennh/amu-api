@@ -319,6 +319,9 @@
     },
     "MDD_BENH_PHONG": {
       "type": "string"
+    },
+    "BENH_VIEN": {
+      "type": "string"
     }
   }
 }
