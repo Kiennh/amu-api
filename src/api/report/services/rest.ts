@@ -12,15 +12,16 @@ export default () => ({
       AMUProcessor.of(connection, params).queryCO_CATHETER_TRUNG_TAM(),
       AMUProcessor.of(connection, params).queryCO_THONG_TIEU(),
       AMUProcessor.of(connection, params).queryCO_NOI_KHI_QUAN(),
-      AMUProcessor.of(connection, params).queryCO_SD_KHANG_SINH()
+      AMUProcessor.of(connection, params).queryCO_SD_KHANG_SINH(),
+      AMUProcessor.of(connection, params).queryNHOM_NGAY_NAM_VIEN()
     ]).then(results => {
-      const object = {}
+      const object = {"id": 0}// for strapi
       results.forEach(data => {
         Object.keys(data).forEach(key => {
           object[key] = data[key]
         })
       })
-      return object;
+      return {"data": [object], "meta": {"pagination": {"total": 1}}};
     })
   }
 });

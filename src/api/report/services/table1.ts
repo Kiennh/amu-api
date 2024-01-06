@@ -32,8 +32,12 @@ export class AMUProcessor {
   }
 
   private named = (name) => {
-    return this.query.then((response) => {
-      return {[name]: response}
+    return this.query.then((response: any[]) => {
+      const object = {};
+      response.forEach(res => {
+        object[res[name]] = res;
+      })
+      return {[name]: object}
     })
   }
 
@@ -54,6 +58,7 @@ export class AMUProcessor {
     // select count(distinct MDD_BENH_NHAN) as number, 'medicals' as label   from medical_records where type = 'BASE'
     this.query = this.connection
       .countDistinct('medical_records.MS_BENH_NHAN as number')
+      .select(this.connection.raw(`'total' as "total"`))
       .from("medical_records")
       .where("type", 'in', ['BASE']);
     return this.filter().named("total");
@@ -61,13 +66,14 @@ export class AMUProcessor {
 
   public querySex() {
     // select count(distinct MS_BENH_NHAN) as number, gioi_tinh from patients group by gioi_tinh
-    this.query = this.connection.select('gioi_tinh')
+    this.query = this.connection
+      .select('GIOI_TINH')
       .countDistinct('medical_records.MS_BENH_NHAN as number')
       .from("medical_records")
-      .leftJoin('patients as p', function () {
+      .join('patients as p', function () {
         this.on('medical_records.MDD_BENH_NHAN', '=', 'p.MDD_BENH_NHAN');
       })
-      .groupBy('gioi_tinh');
+      .groupBy('GIOI_TINH');
 
     return this.filter().named("GIOI_TINH");
   }
@@ -85,15 +91,17 @@ export class AMUProcessor {
 //   group by type
 
   public queryPHAU_THUAT = () => {
-    this.query = this.connection.with('medical_records',
-      this.connection.raw(`     select *,
-                                       case
-                                         when CO_PHAU_THUAT <> 'yes' then 'No surgery'
-                                         when CO_PHAU_THUAT = 'yes' and LOAI_PHAU_THUAT_DA_THUC_HIEN = 'NHSN'
-                                           then 'NHSN surgegy'
-                                         else 'Non-NHSN surgegy' end as tx1
-                                from medical_records
-                                where type = 'BASE' `))
+    this.query = this.connection
+      .with('medical_records',
+        this.connection.raw(`     select *,
+                                         case
+                                           when CO_PHAU_THUAT <> 'yes' then 'No surgery'
+                                           when CO_PHAU_THUAT = 'yes' and LOAI_PHAU_THUAT_DA_THUC_HIEN = 'NHSN'
+                                             then 'NHSN surgegy'
+                                           else 'Non-NHSN surgegy' end as tx1
+                                  from medical_records
+                                  where type = 'BASE' `)
+      )
       .countDistinct('medical_records.MS_BENH_NHAN as number')
       .select('tx1 as PHAU_THUAT')
       .from('medical_records')
@@ -118,8 +126,12 @@ export class AMUProcessor {
     return this.medicalQuery(["BASE"], "CO_NOI_KHI_QUAN").named("CO_NOI_KHI_QUAN")
   }
 
-  public  queryCO_SD_KHANG_SINH = () => {
+  public queryCO_SD_KHANG_SINH = () => {
     return this.medicalQuery(["BASE"], "CO_SD_KHANG_SINH").named("CO_SD_KHANG_SINH")
+  }
+
+  public queryNHOM_NGAY_NAM_VIEN = () => {
+    return this.medicalQuery(["BASE"], "NHOM_NGAY_NAM_VIEN").named("NHOM_NGAY_NAM_VIEN")
   }
 
   static of(connection: Knex, params: URLSearchParams) {
