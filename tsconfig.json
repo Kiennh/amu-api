@@ -8,6 +8,7 @@
   "include": ["./", "src/**/*.json"],
   "exclude": [
     "node_modules/",
+    "public/",
     "build/",
     "dist/",
     ".cache/",
