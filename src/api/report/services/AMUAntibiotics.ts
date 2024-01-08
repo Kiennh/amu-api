@@ -67,6 +67,27 @@ export class AMUAntibiotics extends Base {
     return this.named("KHANG_SINH");
   }
 
+  public queryWHO_AWARE() {
+    // select count(distinct MS_BENH_NHAN) as number, a.variable_3 as class, a.name as name
+    // from medical_records m join antibiotics a
+    // on m.type = 'KHANG_SINH' and m.TEN_HOAT_CHAT_KS = a.name
+    // group by a.variable_3, a.name
+    this.query = this.connection
+      .countDistinct('medical_records.MS_BENH_NHAN as number')
+      .select(this.connection.raw(`antibiotics.who_aware as who_aware`))
+      .from("medical_records")
+      .leftJoin("antibiotics", function () {
+        this.on('medical_records.TEN_HOAT_CHAT_KS', '=', 'antibiotics.name')
+          .andOnVal('medical_records.TEN_HOAT_CHAT_KS', '<>', '')
+          .andOnVal('medical_records.type', '=', 'KHANG_SINH');
+      })
+      .where("antibiotics.who_aware", "is not", null)
+      .groupByRaw('antibiotics.who_aware');
+
+    console.warn(this.query.toSQL());
+    return this.query;
+  }
+
 
   protected named = (name) => {
     return this.query.then((response: any[]) => {

@@ -44,7 +44,7 @@ export default {
     const url = new URL(`https://${ctx.request.header.host}${ctx.request.url}`);
     try {
       const service: any = strapi.service('api::report.rest' as never);
-      ctx.body = "{}";
+      ctx.body = await service.antibioticsTable4_2(url.searchParams);
     } catch (err) {
       ctx.body = err;
     }

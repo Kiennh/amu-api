@@ -42,6 +42,20 @@ export default () => ({
       return {"data": [object], "meta": {"pagination": {"total": 1}}};
     })
   },
+  antibioticsTable4_2: async (params: URLSearchParams) => {
+    const connection = strapi.db.connection;
+    return Promise.all([
+      AMUAntibiotics.of(connection, params).queryWHO_AWARE(),
+    ]).then(results => {
+      const object = []
+      results.forEach(data => {
+        Object.keys(data).forEach(key => {
+          object.push({id: key, ...data[key]})
+        })
+      })
+      return {"data": object, "meta": {"pagination": {"total": object.length}}};
+    });
+  },
   patientCharacteristicsTable2_1: async (params: URLSearchParams) => {
     const connection = strapi.db.connection;
     return Promise.all([
