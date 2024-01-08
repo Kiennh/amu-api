@@ -16,5 +16,18 @@ export class Base {
     return this.name
   }
 
+  protected filterQuery(qs: Knex.QueryBuilder, table = '') {
+    if (this.params.has("filters[hospital][$eq]")) {
+      console.warn(this.params.getAll("filters[hospital][$eq]"))
+      qs.where(`${table}BENH_VIEN`, "in", this.params.getAll("filters[hospital][$eq]"))
+    }
+    console.warn(qs.toSQL());
+    return qs;
+  }
+
+  protected filter(table = '') {
+    this.filterQuery(this.query, table);
+    return this;
+  }
 
 }

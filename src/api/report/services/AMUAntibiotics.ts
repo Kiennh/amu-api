@@ -21,7 +21,7 @@ export class AMUAntibiotics extends Base {
       .where("type", 'in', ['KHANG_SINH'])
       .groupBy('antibiotics.variable_3');
     console.warn(this.query.toSQL());
-    return this.named("NHOM_KHANG_SINH");
+    return this.filter('medical_records.').named("NHOM_KHANG_SINH");
   }
 
   public querySD_KHANG_SINH() {
@@ -44,7 +44,7 @@ export class AMUAntibiotics extends Base {
       })
       .groupByRaw(`case when medical_records.id > 0 then 'Use Antibiotic' else 'Not Use Antibiotic' end`);
     console.warn(this.query.toSQL());
-    return this.named("SD_KHANG_SINH");
+    return this.filter('medical_records.').named("SD_KHANG_SINH");
   }
 
   public queryKHANG_SINH() {
@@ -64,7 +64,7 @@ export class AMUAntibiotics extends Base {
       .groupByRaw('antibiotics.variable_3, antibiotics.name');
 
     console.warn(this.query.toSQL());
-    return this.named("KHANG_SINH");
+    return this.filter('medical_records.').named("KHANG_SINH");
   }
 
   public queryWHO_AWARE() {
@@ -85,7 +85,7 @@ export class AMUAntibiotics extends Base {
       .groupByRaw('antibiotics.who_aware');
 
     console.warn(this.query.toSQL());
-    return this.query;
+    return this.filter('medical_records.').query;
   }
 
 

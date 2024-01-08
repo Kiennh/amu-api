@@ -24,15 +24,6 @@ export class AMUSummary extends Base {
     })
   }
 
-  private filter() {
-    this.query.where("medical_records.id", '>', '0')
-    if (this.params.has("filters[hospital][$eq]")) {
-      console.warn(this.params.getAll("filters[hospital][$eq]"))
-      this.query.where("BENH_VIEN", "in", this.params.getAll("filters[hospital][$eq]"))
-    }
-    console.warn(this.query.toSQL());
-    return this;
-  }
 
   public medicalQuery(type: any, fields: string) {
     // select count(distinct MDD_BENH_NHAN) as number, 'medicals' as label   from medical_records where type = 'BASE'
