@@ -30,5 +30,23 @@ export default {
     } catch (err) {
       ctx.body = err;
     }
+  },
+  antibioticsTable4_1: async (ctx, next) => {
+    const url = new URL(`https://${ctx.request.header.host}${ctx.request.url}`);
+    try {
+      const service: any = strapi.service('api::report.rest' as never);
+      ctx.body = await service.antibioticsTable4_1(url.searchParams);
+    } catch (err) {
+      ctx.body = err;
+    }
+  },
+  antibioticsTable4_2: async (ctx, next) => {
+    const url = new URL(`https://${ctx.request.header.host}${ctx.request.url}`);
+    try {
+      const service: any = strapi.service('api::report.rest' as never);
+      ctx.body = "{}";
+    } catch (err) {
+      ctx.body = err;
+    }
   }
 };

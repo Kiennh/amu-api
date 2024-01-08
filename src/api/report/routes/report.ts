@@ -27,5 +27,23 @@ export default {
         middlewares: [],
       },
     },
+    {
+      method: 'GET',
+      path: '/report/antibioticsTable4_1',
+      handler: 'report.antibioticsTable4_1',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
+    {
+      method: 'GET',
+      path: '/report/antibioticsTable4_2',
+      handler: 'report.antibioticsTable4_2',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 };

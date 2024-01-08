@@ -1,5 +1,6 @@
 import {AMUSummary} from './AMUSummary'
 import {AMUPatientCharacteristic} from "./AMUPatientCharacteristic";
+import {AMUAntibiotics} from "./AMUAntibiotics";
 
 
 export default () => ({
@@ -15,6 +16,22 @@ export default () => ({
       AMUSummary.of(connection, params).queryCO_NOI_KHI_QUAN(),
       AMUSummary.of(connection, params).queryCO_SD_KHANG_SINH(),
       AMUSummary.of(connection, params).queryNHOM_NGAY_NAM_VIEN()
+    ]).then(results => {
+      const object = {"id": 0}// for strapi
+      results.forEach(data => {
+        Object.keys(data).forEach(key => {
+          object[key] = data[key]
+        })
+      })
+      return {"data": [object], "meta": {"pagination": {"total": 1}}};
+    })
+  },
+  antibioticsTable4_1: async (params: URLSearchParams) => {
+    const connection = strapi.db.connection;
+    return Promise.all([
+      AMUAntibiotics.of(connection, params).queryKHANG_SINH(),
+      AMUAntibiotics.of(connection, params).queryNHOM_KHANG_SINH(),
+      AMUAntibiotics.of(connection, params).querySD_KHANG_SINH(),
     ]).then(results => {
       const object = {"id": 0}// for strapi
       results.forEach(data => {
