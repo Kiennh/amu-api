@@ -18,5 +18,14 @@ export default {
         middlewares: [],
       },
     },
+    {
+      method: 'GET',
+      path: '/report/patientCharacteristicsTable2_2',
+      handler: 'report.patientCharacteristicsTable2_2',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 };

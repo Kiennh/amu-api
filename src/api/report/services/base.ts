@@ -16,14 +16,5 @@ export class Base {
     return this.name
   }
 
-  protected named = (name) => {
-    return this.query.then((response: any[]) => {
-      const object = {};
-      response.forEach(res => {
-        object[res[name]] = res;
-      })
-      return {[name]: object}
-    })
-  }
 
 }

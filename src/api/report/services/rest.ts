@@ -1,4 +1,5 @@
 import {AMUSummary} from './AMUSummary'
+import {AMUPatientCharacteristic} from "./AMUPatientCharacteristic";
 
 
 export default () => ({
@@ -26,5 +27,30 @@ export default () => ({
   },
   patientCharacteristicsTable2_1: async (params: URLSearchParams) => {
     const connection = strapi.db.connection;
+    return Promise.all([
+      AMUPatientCharacteristic.of(connection, params).queryWardTypePrevalenceAntibioticUse(),
+    ]).then(results => {
+      const object = []
+      results.forEach(data => {
+        Object.keys(data).forEach(key => {
+          object.push({id: key, ...data[key]})
+        })
+      })
+      return {"data": object, "meta": {"pagination": {"total": object.length}}};
+    })
+  },
+  patientCharacteristicsTable2_2: async (params: URLSearchParams) => {
+    const connection = strapi.db.connection;
+    return Promise.all([
+      AMUPatientCharacteristic.of(connection, params).queryWardTypePrevalenceAntibioticUseByAge(),
+    ]).then(results => {
+      const object = []
+      results.forEach(data => {
+        Object.keys(data).forEach(key => {
+          object.push({id: key, ...data[key]})
+        })
+      })
+      return {"data": object, "meta": {"pagination": {"total": object.length}}};
+    })
   }
 });

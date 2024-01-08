@@ -14,6 +14,16 @@ export class AMUSummary extends Base {
   }
 
 
+  protected named = (name) => {
+    return this.query.then((response: any[]) => {
+      const object = {};
+      response.forEach(res => {
+        object[res[name]] = res;
+      })
+      return {[name]: object}
+    })
+  }
+
   private filter() {
     this.query.where("medical_records.id", '>', '0')
     if (this.params.has("filters[hospital][$eq]")) {
