@@ -1,24 +1,16 @@
 import {Knex} from "knex";
+import {Base} from "./base";
 
 /**
  * report service
  */
 
 
-export class AMUProcessor {
-  private readonly name: string;
-  private readonly connection: Knex;
-  private readonly params: URLSearchParams;
-  private query: Knex.QueryBuilder;
+export class AMUSummary extends Base {
 
   constructor(connection: Knex, params: URLSearchParams) {
-    this.name = 'AMUProcessor';
-    this.connection = connection;
-    this.params = params;
-  }
-
-  public hello() {
-    return this.name
+    super(connection, params);
+    this.name = 'AMUSummary';
   }
 
 
@@ -31,17 +23,6 @@ export class AMUProcessor {
     console.warn(this.query.toSQL());
     return this;
   }
-
-  private named = (name) => {
-    return this.query.then((response: any[]) => {
-      const object = {};
-      response.forEach(res => {
-        object[res[name]] = res;
-      })
-      return {[name]: object}
-    })
-  }
-
 
   public medicalQuery(type: any, fields: string) {
     // select count(distinct MDD_BENH_NHAN) as number, 'medicals' as label   from medical_records where type = 'BASE'
@@ -136,7 +117,7 @@ export class AMUProcessor {
   }
 
   static of(connection: Knex, params: URLSearchParams) {
-    return new AMUProcessor(connection, params);
+    return new AMUSummary(connection, params);
   }
 }
 

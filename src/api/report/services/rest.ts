@@ -1,19 +1,19 @@
-import {AMUProcessor} from './table1'
+import {AMUSummary} from './AMUSummary'
 
 
 export default () => ({
-  execute: async (params: URLSearchParams) => {
+  summaryTable1: async (params: URLSearchParams) => {
     const connection = strapi.db.connection;
     return Promise.all([
-      AMUProcessor.of(connection, params).querySex(),
-      AMUProcessor.of(connection, params).queryTotal(),
-      AMUProcessor.of(connection, params).queryAgeGroup(),
-      AMUProcessor.of(connection, params).queryPHAU_THUAT(),
-      AMUProcessor.of(connection, params).queryCO_CATHETER_TRUNG_TAM(),
-      AMUProcessor.of(connection, params).queryCO_THONG_TIEU(),
-      AMUProcessor.of(connection, params).queryCO_NOI_KHI_QUAN(),
-      AMUProcessor.of(connection, params).queryCO_SD_KHANG_SINH(),
-      AMUProcessor.of(connection, params).queryNHOM_NGAY_NAM_VIEN()
+      AMUSummary.of(connection, params).querySex(),
+      AMUSummary.of(connection, params).queryTotal(),
+      AMUSummary.of(connection, params).queryAgeGroup(),
+      AMUSummary.of(connection, params).queryPHAU_THUAT(),
+      AMUSummary.of(connection, params).queryCO_CATHETER_TRUNG_TAM(),
+      AMUSummary.of(connection, params).queryCO_THONG_TIEU(),
+      AMUSummary.of(connection, params).queryCO_NOI_KHI_QUAN(),
+      AMUSummary.of(connection, params).queryCO_SD_KHANG_SINH(),
+      AMUSummary.of(connection, params).queryNHOM_NGAY_NAM_VIEN()
     ]).then(results => {
       const object = {"id": 0}// for strapi
       results.forEach(data => {
@@ -23,5 +23,8 @@ export default () => ({
       })
       return {"data": [object], "meta": {"pagination": {"total": 1}}};
     })
+  },
+  patientCharacteristicsTable2_1: async (params: URLSearchParams) => {
+    const connection = strapi.db.connection;
   }
 });
