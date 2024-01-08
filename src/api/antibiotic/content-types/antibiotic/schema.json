@@ -26,6 +26,9 @@
     },
     "variable3": {
       "type": "string"
+    },
+    "WHO_AWARE": {
+      "type": "string"
     }
   }
 }

@@ -785,6 +785,7 @@ export interface ApiAntibioticAntibiotic extends Schema.CollectionType {
     note: Attribute.Text;
     class: Attribute.String;
     variable3: Attribute.String;
+    WHO_AWARE: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
