@@ -9,7 +9,10 @@ export class AMUTreatments extends Base {
   // from medical_records where type = 'VI_SINH'
   // group by KET_QUA_NUOI_CAY
   // Tử số: số bệnh nhân sử dụng kháng sinh có lấy mẫu nuôi cấy. Mẫu số: tổng số bệnh nhân sử dụng kháng sinh
+
   public queryKET_QUA_NUOI_CAY() {
+    const CO_KET_QUA_NUOI_CAY = `case when KET_QUA_NUOI_CAY <> '' then 'yes' else 'no' end`
+    const connection = this.connection;
     this.query = this.connection
       .with('use_antibiotics',
         this.connection.raw(`select distinct(MS_BENH_NHAN) as MS_BENH_NHAN, 'yes' as label
@@ -17,17 +20,16 @@ export class AMUTreatments extends Base {
                              where type in ('KHANG_SINH')
                                and TEN_HOAT_CHAT_KS <> '' `)
       )
-      .countDistinct('medical_records.MS_BENH_NHAN as number')
-      .select("KET_QUA_NUOI_CAY")
-      .from("medical_records")
-      .join("use_antibiotics", function () {
-        this.on("medical_records.MS_BENH_NHAN", "=", "use_antibiotics.MS_BENH_NHAN")
+      .countDistinct('use_antibiotics.MS_BENH_NHAN as number')
+      .select(this.connection.raw(`${CO_KET_QUA_NUOI_CAY} as CO_KET_QUA_NUOI_CAY`))
+      .from("use_antibiotics")
+      .leftJoin("medical_records", function () {
+        this.on(connection.raw(`medical_records.MS_BENH_NHAN = use_antibiotics.MS_BENH_NHAN  and medical_records.type = 'VI_SINH' `))
       })
-      .where("type", 'in', ["VI_SINH"])
       .where("label", 'in', ["yes"])
-      .groupBy("KET_QUA_NUOI_CAY");
+      .groupByRaw(CO_KET_QUA_NUOI_CAY);
 
-    return this.filter().named("KET_QUA_NUOI_CAY")
+    return this.filter().named("CO_KET_QUA_NUOI_CAY")
   }
 
   // select count(distinct MS_BENH_NHAN) as number, LOAI_CHI_DINH
@@ -39,10 +41,10 @@ export class AMUTreatments extends Base {
       .countDistinct('medical_records.id as number')
       .select(this.connection.raw(`case when LOAI_CHI_DINH = '' then 'Missing' else LOAI_CHI_DINH end as LOAI_CHI_DINH`))
       .from("medical_records")
-      .where("type", 'in', ["VI_SINH"])
+      .where("type", 'in', ["CHI_DINH"])
       .groupByRaw("case when LOAI_CHI_DINH = '' then 'Missing' else LOAI_CHI_DINH end");
 
-    return this.filter().named("TOTAL_SU_DUNG_KHANG_SINH")
+    return this.filter().named("LOAI_CHI_DINH")
   }
 
   // Tử số: số lượt sử dụng kháng sinh dự phòng liều đơn (SP1) hoặc trong vòng 1 ngày (SP2) hoặc >1 ngày (SP3). Mẫu số: tổng số lượt chỉ định kháng sinh dự phòng phẫu thuật
