@@ -1,6 +1,7 @@
 import {AMUSummary} from './AMUSummary'
 import {AMUPatientCharacteristic} from "./AMUPatientCharacteristic";
 import {AMUAntibiotics} from "./AMUAntibiotics";
+import {AMUTreatments} from "./AMUTreatments";
 
 
 export default () => ({
@@ -87,9 +88,15 @@ export default () => ({
   treatmentsTable3: async (params: URLSearchParams) => {
     const connection = strapi.db.connection;
     return Promise.all([
-      AMUAntibiotics.of(connection, params).queryKHANG_SINH(),
-      AMUAntibiotics.of(connection, params).queryNHOM_KHANG_SINH(),
-      AMUAntibiotics.of(connection, params).querySD_KHANG_SINH(),
+      AMUTreatments.of(connection, params).queryDUONG_DUNG(),
+      AMUTreatments.of(connection, params).queryTOTAL_LIEU_KHANG_SINH(),
+      AMUTreatments.of(connection, params).queryKET_QUA_NUOI_CAY(),
+      AMUTreatments.of(connection, params).queryTOTAL_SU_DUNG_KHANG_SINH(),
+      AMUTreatments.of(connection, params).queryTHOI_GIAN_SD_KS_DP_NGOAI_KHOA(),
+      AMUTreatments.of(connection, params).queryLOAI_CHI_DINH(),
+      AMUTreatments.of(connection, params).queryKHANG_SINH_DON_LIEU_DA_LIEU(),
+      AMUTreatments.of(connection, params).queryDIEU_TRI_THEO(),
+      AMUTreatments.of(connection, params).queryTUAN_THU_HUONG_DAN_DIEU_TRI(),
     ]).then(results => {
       const object = {"id": 0}// for strapi
       results.forEach(data => {
