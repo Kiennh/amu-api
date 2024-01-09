@@ -74,15 +74,18 @@ export class AMUAntibiotics extends Base {
     // group by a.variable_3, a.name
     this.query = this.connection
       .countDistinct('medical_records.MS_BENH_NHAN as number')
-      .select(this.connection.raw(`antibiotics.who_aware as who_aware`))
+      .select(this.connection.raw(`antibiotics.who_aware as who_aware, case when departments.type is null then 'Missing' else departments.type end as type`))
       .from("medical_records")
       .leftJoin("antibiotics", function () {
         this.on('medical_records.TEN_HOAT_CHAT_KS', '=', 'antibiotics.name')
           .andOnVal('medical_records.TEN_HOAT_CHAT_KS', '<>', '')
           .andOnVal('medical_records.type', '=', 'KHANG_SINH');
       })
+      .leftJoin('departments', function () {
+        this.on('medical_records.MDD_BENH_PHONG', '=', 'departments.ward_type_code')
+      })
       .where("antibiotics.who_aware", "is not", null)
-      .groupByRaw('antibiotics.who_aware');
+      .groupByRaw("antibiotics.who_aware, case when departments.type is null then 'Missing' else departments.type end");
 
     console.warn(this.query.toSQL());
     return this.filter('medical_records.').query;

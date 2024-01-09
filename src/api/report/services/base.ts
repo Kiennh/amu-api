@@ -21,6 +21,10 @@ export class Base {
       console.warn(this.params.getAll("filters[hospital][$eq]"))
       qs.where(`${table}BENH_VIEN`, "in", this.params.getAll("filters[hospital][$eq]"))
     }
+    if (this.params.has("filters[age][$eq]")) {
+      console.warn(this.params.getAll("filters[hospital][$eq]"))
+      qs.where(`${table}NHOM_TUOI`, "in", this.params.getAll("filters[age][$eq]"))
+    }
     console.warn(qs.toSQL());
     return qs;
   }
