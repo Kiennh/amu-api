@@ -25,18 +25,6 @@ export class AMUSummary extends Base {
   }
 
 
-  public medicalQuery(type: any, fields: string) {
-    // select count(distinct MDD_BENH_NHAN) as number, 'medicals' as label   from medical_records where type = 'BASE'
-    this.query = this.connection
-      .countDistinct('medical_records.MS_BENH_NHAN as number')
-      .select(fields)
-      .from("medical_records")
-      .where("type", 'in', type)
-      .groupBy(fields);
-
-    return this.filter();
-  }
-
   public queryTotal() {
     // select count(distinct MDD_BENH_NHAN) as number, 'medicals' as label   from medical_records where type = 'BASE'
     this.query = this.connection

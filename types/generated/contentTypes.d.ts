@@ -768,6 +768,39 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
+export interface ApiAdministrationRouteAdministrationRoute
+  extends Schema.CollectionType {
+  collectionName: 'administration_routes';
+  info: {
+    singularName: 'administration-route';
+    pluralName: 'administration-routes';
+    displayName: 'Administration Route';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    code: Attribute.String;
+    DUONG_DUNG: Attribute.String;
+    LOAI_DUONG_TIEM_TRUYEN: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::administration-route.administration-route',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::administration-route.administration-route',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiAntibioticAntibiotic extends Schema.CollectionType {
   collectionName: 'antibiotics';
   info: {
@@ -1258,6 +1291,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::administration-route.administration-route': ApiAdministrationRouteAdministrationRoute;
       'api::antibiotic.antibiotic': ApiAntibioticAntibiotic;
       'api::department.department': ApiDepartmentDepartment;
       'api::diagnosis.diagnosis': ApiDiagnosisDiagnosis;

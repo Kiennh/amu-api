@@ -1,0 +1,24 @@
+{
+  "kind": "collectionType",
+  "collectionName": "administration_routes",
+  "info": {
+    "singularName": "administration-route",
+    "pluralName": "administration-routes",
+    "displayName": "Administration Route"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "code": {
+      "type": "string"
+    },
+    "DUONG_DUNG": {
+      "type": "string"
+    },
+    "LOAI_DUONG_TIEM_TRUYEN": {
+      "type": "string"
+    }
+  }
+}

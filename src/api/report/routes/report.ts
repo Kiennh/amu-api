@@ -45,5 +45,14 @@ export default {
         middlewares: [],
       },
     },
+    {
+      method: 'GET',
+      path: '/report/treatmentsTable3',
+      handler: 'report.treatmentsTable3',
+      config: {
+        policies: [],
+        middlewares: [],
+      },
+    },
   ],
 };

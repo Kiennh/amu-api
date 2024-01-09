@@ -83,5 +83,21 @@ export default () => ({
       })
       return {"data": object, "meta": {"pagination": {"total": object.length}}};
     })
-  }
+  },
+  treatmentsTable3: async (params: URLSearchParams) => {
+    const connection = strapi.db.connection;
+    return Promise.all([
+      AMUAntibiotics.of(connection, params).queryKHANG_SINH(),
+      AMUAntibiotics.of(connection, params).queryNHOM_KHANG_SINH(),
+      AMUAntibiotics.of(connection, params).querySD_KHANG_SINH(),
+    ]).then(results => {
+      const object = {"id": 0}// for strapi
+      results.forEach(data => {
+        Object.keys(data).forEach(key => {
+          object[key] = data[key]
+        })
+      })
+      return {"data": [object], "meta": {"pagination": {"total": 1}}};
+    })
+  },
 });
