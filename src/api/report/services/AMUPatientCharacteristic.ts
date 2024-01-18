@@ -67,7 +67,7 @@ export class AMUPatientCharacteristic extends Base {
       .from('t1')
       .leftJoin('t2', function () {
         this.on('t1.NHOM_TUOI', '=', 't2.NHOM_TUOI');
-      });
+      }).orderByRaw("case when t1.NHOM_TUOI = '<28 days (neonates)' then 1 when t1.NHOM_TUOI = '<2 year (infants)' then 2 when t1.NHOM_TUOI = '2-12 year' then 3 when t1.NHOM_TUOI = '>12 year' then 4 else 5 end");
     console.warn(this.query.toSQL());
     return this.query;
   }

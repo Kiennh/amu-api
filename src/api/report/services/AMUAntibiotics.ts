@@ -18,7 +18,7 @@ export class AMUAntibiotics extends Base {
           .andOnVal('medical_records.TEN_HOAT_CHAT_KS', '<>', '')
           .andOnVal('medical_records.type', '=', 'KHANG_SINH');
       })
-      .where("type", 'in', ['KHANG_SINH'])
+      .where("antibiotics.name", "is not", null)
       .groupBy('antibiotics.variable_3');
     console.warn(this.query.toSQL());
     return this.filter('medical_records.').named("NHOM_KHANG_SINH");
@@ -42,7 +42,8 @@ export class AMUAntibiotics extends Base {
           .andOnVal('medical_records.TEN_HOAT_CHAT_KS', '<>', '')
           .andOnVal('medical_records.type', '=', 'KHANG_SINH');
       })
-      .groupByRaw(`case when medical_records.id > 0 then 'Use Antibiotic' else 'Not Use Antibiotic' end`);
+      .where("antibiotics.name", "is not", null)
+      .groupByRaw(`case when medical_records.id > 0 then 'Use Antibiotic' else 'Not Use Antibiotic' end`)
     console.warn(this.query.toSQL());
     return this.filter('medical_records.').named("SD_KHANG_SINH");
   }
@@ -61,6 +62,7 @@ export class AMUAntibiotics extends Base {
           .andOnVal('medical_records.TEN_HOAT_CHAT_KS', '<>', '')
           .andOnVal('medical_records.type', '=', 'KHANG_SINH');
       })
+      .where("antibiotics.name", "is not", null)
       .groupByRaw('antibiotics.variable_3, antibiotics.name');
 
     console.warn(this.query.toSQL());
