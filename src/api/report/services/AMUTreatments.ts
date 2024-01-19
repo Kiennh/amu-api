@@ -16,7 +16,7 @@ export class AMUTreatments extends Base {
     this.query = this.connection
       .with('use_antibiotics',
         this.connection.raw(`select  MS_BENH_NHAN, 'yes' as label
-                    from medical_records where type in ('KHANG_SINH') and TEN_HOAT_CHAT_KS <> '' `)
+                    from medical_records where type in ('KHANG_SINH') and CO_SD_KHANG_SINH = 'yes' `)
       )
       .countDistinct('use_antibiotics.MS_BENH_NHAN as number')
       .select(this.connection.raw(`${CO_KET_QUA_NUOI_CAY} as CO_KET_QUA_NUOI_CAY`))
