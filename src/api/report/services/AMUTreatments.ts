@@ -11,22 +11,19 @@ export class AMUTreatments extends Base {
   // Tử số: số bệnh nhân sử dụng kháng sinh có lấy mẫu nuôi cấy. Mẫu số: tổng số bệnh nhân sử dụng kháng sinh
 
   public queryKET_QUA_NUOI_CAY() {
-    const CO_KET_QUA_NUOI_CAY = `case when use_antibiotics.label = 'yes' then 'yes' else 'no' end`
+    const CO_KET_QUA_NUOI_CAY = `case when medical_records.CO_LAY_MAU_CHO_XN_VI_SINH = 'yes' then 'yes' when medical_records.CO_LAY_MAU_CHO_XN_VI_SINH = 'no' then 'no' else 'unknown' end`
     const connection = this.connection;
     this.query = this.connection
       .with('use_antibiotics',
-        this.connection.raw(`select distinct(MS_BENH_NHAN) as MS_BENH_NHAN, 'yes' as label
-                             from medical_records
-                             where type in ('KHANG_SINH')
-                               and TEN_HOAT_CHAT_KS <> '' `)
+        this.connection.raw(`select  MS_BENH_NHAN, 'yes' as label
+                    from medical_records where type in ('KHANG_SINH') and TEN_HOAT_CHAT_KS <> '' `)
       )
-      .countDistinct('medical_records.MS_BENH_NHAN as number')
+      .countDistinct('use_antibiotics.MS_BENH_NHAN as number')
       .select(this.connection.raw(`${CO_KET_QUA_NUOI_CAY} as CO_KET_QUA_NUOI_CAY`))
-      .from("medical_records")
-      .leftJoin("use_antibiotics", function () {
-        this.on(connection.raw(`medical_records.MS_BENH_NHAN = use_antibiotics.MS_BENH_NHAN  and medical_records.type = 'VI_SINH' `))
+      .from("use_antibiotics")
+      .leftJoin("medical_records", function () {
+        this.on(connection.raw(`medical_records.MS_BENH_NHAN = use_antibiotics.MS_BENH_NHAN  and medical_records.type = 'CHI_DINH' `))
       })
-   //   .where("label", 'in', ["yes"])
       .groupByRaw(CO_KET_QUA_NUOI_CAY);
 
     return this.filter().named("CO_KET_QUA_NUOI_CAY")
