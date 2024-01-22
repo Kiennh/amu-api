@@ -1230,7 +1230,6 @@ export interface ApiVersionVersion extends Schema.CollectionType {
   };
   attributes: {
     name: Attribute.String;
-    code: Attribute.String & Attribute.Required & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

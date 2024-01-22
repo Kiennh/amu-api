@@ -14,11 +14,6 @@
   "attributes": {
     "name": {
       "type": "string"
-    },
-    "code": {
-      "type": "string",
-      "required": true,
-      "unique": true
     }
   }
 }
