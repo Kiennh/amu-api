@@ -5,6 +5,11 @@ export default {
       path: '/report/summary',
       handler: 'report.summaryTable1',
       config: {
+        "description": "Report summary",
+        "tag": {
+          "plugin": "ReportAPI",
+          "name": "ReportAPI"
+        },
         policies: [],
         middlewares: [],
       },

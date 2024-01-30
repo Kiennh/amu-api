@@ -1,5 +1,5 @@
 {
-  "/report/summary": {
+  "/reports": {
     "get": {
       "responses": {
         "200": {
@@ -7,7 +7,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/PatientResponse"
+                "$ref": "#/components/schemas/QuestionListResponse"
               }
             }
           }
@@ -64,9 +64,9 @@
         }
       },
       "tags": [
-        "Reports"
+        "ReportAPI"
       ],
-      "operationId": "get/report/summary"
+      "operationId": "get/reports"
     }
   }
 }
